@@ -1,1 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>كتالوج أدوات السلامة المهنية</title>
+  <style>
+    :root {
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --whatsapp: #25d366;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-bottom: 40px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #fbbf24;
+    }
+
+    header p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background-color: #f1f5f9;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .category {
+      font-size: 0.8rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 5px;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      background-color: var(--whatsapp);
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #1eb954;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>كتالوج معدات وأدوات السلامة</h1>
+    <p>حلول ومعدات السلامة المهنية للحماية والوقاية بالمواقع</p>
+  </header>
+
+  <div class="container">
+    <div class="grid" id="catalog"></div>
+  </div>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2026 - كتالوج أدوات السلامة</p>
+  </footer>
+
+  <script>
+    // رقم الواتساب الخاص بك لاستقبال الطلبات (قم بتغييره مع مفتاح الدولة بدون +)
+    const whatsappNumber = "966500000000";
+
+    fetch('products.json')
+      .then(response => response.json())
+      .then(products => {
+        const catalogContainer = document.getElementById('catalog');
+        products.forEach(product => {
+          const productMessage = encodeURIComponent(`السلام عليكم، أريد الاستفسار عن المنتج: ${product.name}`);
+          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${productMessage}`;
+
+          catalogContainer.innerHTML += `
+            <div class="card">
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+              <div class="card-body">
+                <span class="category">${product.category}</span>
+                <h2 class="title">${product.name}</h2>
+                <p class="desc">${product.description}</p>
+                <a class="btn-whatsapp" href="${whatsappUrl}" target="_blank">
+                  طلب استفسار عبر الواتساب
+                </a>
+              </div>
+            </div>
+          `;
+        });
+      })
+      .catch(error => console.error('خطأ في تحميل قائمة المنتجات:', error));
+  </script>
+
+</body>
+</html>
 
