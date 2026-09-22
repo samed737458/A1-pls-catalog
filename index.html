@@ -3,187 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>كتالوج أدوات السلامة المهنية</title>
+  <title>A1 PLUS - كتالوج أدوات السلامة</title>
   <style>
     :root {
-      --primary: #d97706;
-      --primary-hover: #b45309;
-      --bg-color: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --whatsapp: #25d366;
+      --bg-dark: #0d0d0d;
+      --card-bg: #161616;
+      --card-border: #262626;
+      --accent-cyan: #00d2d3;
+      --accent-gold: #f39c12;
+      --text-white: #ffffff;
+      --text-muted: #aaaaaa;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 90px; }
 
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      line-height: 1.6;
-      padding-bottom: 40px;
+    /* Header & Logo */
+    header { text-align: center; padding: 30px 15px 15px; }
+    .logo-container {
+      width: 100px; height: 100px; margin: 0 auto 15px;
+      border-radius: 50%; border: 3px solid var(--accent-gold);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
+      background: #000;
     }
+    .logo-container img { width: 80%; height: 80%; object-fit: contain; }
+    header h1 { font-size: 1.6rem; letter-spacing: 1px; color: var(--text-white); margin-bottom: 5px; }
+    header p { font-size: 0.85rem; color: var(--text-muted); }
 
-    header {
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    header h1 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #fbbf24;
-    }
-
-    header p {
-      color: #cbd5e1;
-      font-size: 1.1rem;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-    }
+    /* Products Grid */
+    .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
 
     .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
+      background-color: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
+      position: relative; transition: border-color 0.2s;
+    }
+    .card.active { border-color: var(--accent-gold); box-shadow: 0 0 10px rgba(243, 156, 18, 0.2); }
+
+    .img-container { position: relative; width: 100%; height: 260px; background: #050505; }
+    .img-container img { width: 100%; height: 100%; object-fit: cover; }
+    .badge {
+      position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6);
+      color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    .card-body { padding: 15px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
+    .product-title { font-size: 1.05rem; font-weight: bold; color: var(--text-white); }
+    .price { color: var(--accent-cyan); font-size: 1.1rem; font-weight: bold; }
+
+    /* Options (Colors & Sizes) */
+    .options-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3px; }
+    .color-options { display: flex; gap: 8px; align-items: center; }
+    .color-dot {
+      width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
+    }
+    .color-dot.active { border-color: var(--accent-cyan); }
+
+    select.size-select {
+      width: 100%; background: #222; color: #fff; border: 1px solid #333;
+      padding: 8px; border-radius: 6px; outline: none; font-size: 0.85rem;
     }
 
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      background-color: #f1f5f9;
+    .btn-add {
+      background-color: var(--accent-cyan); color: #000; border: none;
+      padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
+      margin-top: auto; font-size: 0.95rem; width: 100%;
     }
 
-    .card-body {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
+    /* Fixed Bottom Bar */
+    .cart-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; background: #111;
+      border-top: 1px solid var(--accent-gold); padding: 12px 20px;
+      display: flex; justify-content: space-between; align-items: center; z-index: 100;
     }
-
-    .category {
-      font-size: 0.8rem;
-      color: var(--primary);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
-    }
-
-    .title {
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-      color: var(--text-main);
-    }
-
-    .desc {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }
-
-    .btn-whatsapp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px;
-      background-color: var(--whatsapp);
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.2s;
-    }
-
-    .btn-whatsapp:hover {
-      background-color: #1eb954;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
+    .cart-info { font-size: 0.9rem; font-weight: bold; color: var(--text-white); }
+    .cart-actions { display: flex; gap: 10px; }
+    .btn-clear { background: #e74c3c; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+    .btn-send { background: #27ae60; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.85rem; }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>كتالوج معدات وأدوات السلامة</h1>
-    <p>حلول ومعدات السلامة المهنية للحماية والوقاية بالمواقع</p>
+    <div class="logo-container">
+      <h2 style="color:var(--accent-gold)">A1</h2>
+    </div>
+    <h1>TOP GIVING / A1 PLUS</h1>
+    <p>تصفح منتجاتنا وأضفها للسلة ثم اطلب عبر الواتساب</p>
   </header>
 
   <div class="container">
     <div class="grid" id="catalog"></div>
   </div>
 
-  <footer>
-    <p>جميع الحقوق محفوظة &copy; 2026 - كتالوج أدوات السلامة</p>
-  </footer>
+  <!-- Bottom Fixed Cart -->
+  <div class="cart-bar">
+    <div class="cart-info" id="cartCount">السلة فارغة (0 منتجات)</div>
+    <div class="cart-actions">
+      <button class="btn-clear" onclick="clearCart()">إفراغ السلة</button>
+      <a href="#" class="btn-send" id="whatsappBtn" onclick="sendOrder(event)">إرسال الطلب (واتساب)</a>
+    </div>
+  </div>
 
   <script>
-    // رقم الواتساب الخاص بك لاستقبال الطلبات (قم بتغييره مع مفتاح الدولة بدون +)
-    const whatsappNumber = "966500000000";
+    const whatsappNumber = "966500000000"; // ضغ رقمك هنا
+    let cart = [];
 
     fetch('products.json')
-      .then(response => response.json())
+      .then(res => res.json())
       .then(products => {
-        const catalogContainer = document.getElementById('catalog');
-        products.forEach(product => {
-          const productMessage = encodeURIComponent(`السلام عليكم، أريد الاستفسار عن المنتج: ${product.name}`);
-          const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${productMessage}`;
-
-          catalogContainer.innerHTML += `
-            <div class="card">
-              <img src="${product.image}" alt="${product.name}" loading="lazy">
+        const container = document.getElementById('catalog');
+        products.forEach((p, idx) => {
+          container.innerHTML += `
+            <div class="card ${idx === 0 ? 'active' : ''}">
+              <div class="img-container">
+                <span class="badge">1 / 1</span>
+                <img src="${p.image}" alt="${p.name}">
+              </div>
               <div class="card-body">
-                <span class="category">${product.category}</span>
-                <h2 class="title">${product.name}</h2>
-                <p class="desc">${product.description}</p>
-                <a class="btn-whatsapp" href="${whatsappUrl}" target="_blank">
-                  طلب استفسار عبر الواتساب
-                </a>
+                <div class="product-title">${p.name}</div>
+                <div class="price">${p.price}</div>
+                
+                <div>
+                  <div class="options-label">الشد / التعبئة:</div>
+                  <div class="color-options">
+                    <span style="font-size:0.8rem; color:#fff">${p.pack_info || '12 حبة'}</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="options-label">الكمية:</div>
+                  <select class="size-select" id="qty-${p.id}">
+                    <option value="1">1 شد (كرتون)</option>
+                    <option value="2">2 شد</option>
+                    <option value="5">5 شد</option>
+                  </select>
+                </div>
+
+                <button class="btn-add" onclick="addToCart('${p.name}', '${p.price}', ${p.id})">أضف إلى السلة</button>
               </div>
             </div>
           `;
         });
-      })
-      .catch(error => console.error('خطأ في تحميل قائمة المنتجات:', error));
+      });
+
+    function addToCart(name, price, id) {
+      const qty = document.getElementById(`qty-${id}`).value;
+      cart.push({ name, price, qty });
+      updateCartUI();
+    }
+
+    function clearCart() {
+      cart = [];
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      document.getElementById('cartCount').innerText = `السلة تحتوي على (${cart.length} منتجات)`;
+    }
+
+    function sendOrder(e) {
+      e.preventDefault();
+      if(cart.length === 0) { alert('السلة فارغة!'); return; }
+      
+      let msg = "السلام عليكم، أريد طلب المنتجات التالية:\n\n";
+      cart.forEach((item, i) => {
+        msg += `${i+1}. ${item.name} - الكمية: ${item.qty} (${item.price})\n`;
+      });
+      
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
   </script>
 
 </body>
