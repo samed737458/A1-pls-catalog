@@ -1,1 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "خوذة سلامة صناعية معتمدة",
+    "category": "معدات حماية الرأس",
+    "description": "خوذة سلامة عالية الجودة مقاومة للصدمات وتتحمل ظروف العمل الشاقة، مطابقة للمواصفات المعيارية.",
+    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": 2,
+    "name": "حذاء سلامة (Safety Shoes)",
+    "category": "معدات حماية القدمين",
+    "description": "حذاء سلامة بمقدمة صلبة لحماية الأصابع ونعل مضاد للانزلاق والمواد الكيميائية.",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": 3,
+    "name": "نظارات واقية معتمدة",
+    "category": "حماية العينين",
+    "description": "نظارات حماية شفافة مقاومة للخدش والضباب لحماية العينين أثناء عمليات القطع واللحام.",
+    "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": 4,
+    "name": "قفازات حماية عالية التحمل",
+    "category": "حماية اليدين",
+    "description": "قفازات مضادة للقطع والحرارة مصممة لتوفير أقصى درجات الثبات والراحة أثناء العمل.",
+    "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80"
+  },
+  {
+    "id": 5,
+    "name": "طفايات حريق متعددة الأغراض",
+    "category": "معدات إطفاء الحريق",
+    "description": "طفاية حريق بودرة جافة معتمدة للتعامل مع أنواع الحرائق المختلفة للمكاتب والمواقع.",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=500&q=80"
+  }
+]
 
