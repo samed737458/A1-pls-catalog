@@ -1,144 +1,41 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A1 PLUS - كتالوج أدوات السلامة</title>
-  <style>
-    :root {
-      --bg-dark: #0d0d0d;
-      --card-bg: #161616;
-      --card-border: #262626;
-      --accent-cyan: #00d2d3;
-      --accent-gold: #f39c12;
-      --text-white: #ffffff;
-      --text-muted: #aaaaaa;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 90px; }
-
-    /* Header & Logo */
-    header { text-align: center; padding: 30px 15px 15px; }
-    .logo-container {
-      width: 100px; height: 100px; margin: 0 auto 15px;
-      border-radius: 50%; border: 3px solid var(--accent-gold);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 15px rgba(243, 156, 18, 0.3);
-      background: #000;
-    }
-    .logo-container img { width: 80%; height: 80%; object-fit: contain; }
-    header h1 { font-size: 1.6rem; letter-spacing: 1px; color: var(--text-white); margin-bottom: 5px; }
-    header p { font-size: 0.85rem; color: var(--text-muted); }
-
-    /* Products Grid */
-    .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
-
-    .card {
-      background-color: var(--card-bg); border: 1px solid var(--card-border);
-      border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;
-      position: relative; transition: border-color 0.2s;
-    }
-    .card.active { border-color: var(--accent-gold); box-shadow: 0 0 10px rgba(243, 156, 18, 0.2); }
-
-    .img-container { position: relative; width: 100%; height: 260px; background: #050505; }
-    .img-container img { width: 100%; height: 100%; object-fit: cover; }
-    .badge {
-      position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6);
-      color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;
-    }
-
-    .card-body { padding: 15px; display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
-    .product-title { font-size: 1.05rem; font-weight: bold; color: var(--text-white); }
-    .price { color: var(--accent-cyan); font-size: 1.1rem; font-weight: bold; }
-
-    /* Options (Colors & Sizes) */
-    .options-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3px; }
-    .color-options { display: flex; gap: 8px; align-items: center; }
-    .color-dot {
-      width: 18px; height: 18px; border-radius: 50%; border: 2px solid transparent; cursor: pointer;
-    }
-    .color-dot.active { border-color: var(--accent-cyan); }
-
-    select.size-select {
-      width: 100%; background: #222; color: #fff; border: 1px solid #333;
-      padding: 8px; border-radius: 6px; outline: none; font-size: 0.85rem;
-    }
-
-    .btn-add {
-      background-color: var(--accent-cyan); color: #000; border: none;
-      padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer;
-      margin-top: auto; font-size: 0.95rem; width: 100%;
-    }
-
-    /* Fixed Bottom Bar */
-    .cart-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; background: #111;
-      border-top: 1px solid var(--accent-gold); padding: 12px 20px;
-      display: flex; justify-content: space-between; align-items: center; z-index: 100;
-    }
-    .cart-info { font-size: 0.9rem; font-weight: bold; color: var(--text-white); }
-    .cart-actions { display: flex; gap: 10px; }
-    .btn-clear { background: #e74c3c; color: #fff; border: none; padding: 8px 12px; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    .btn-send { background: #27ae60; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 0.85rem; }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="logo-container">
-      <h2 style="color:var(--accent-gold)">A1</h2>
-    </div>
-    <h1>TOP GIVING / A1 PLUS</h1>
-    <p>تصفح منتجاتنا وأضفها للسلة ثم اطلب عبر الواتساب</p>
-  </header>
-
-  <div class="container">
-    <div class="grid" id="catalog"></div>
-  </div>
-
-  <!-- Bottom Fixed Cart -->
-  <div class="cart-bar">
-    <div class="cart-info" id="cartCount">السلة فارغة (0 منتجات)</div>
-    <div class="cart-actions">
-      <button class="btn-clear" onclick="clearCart()">إفراغ السلة</button>
-      <a href="#" class="btn-send" id="whatsappBtn" onclick="sendOrder(event)">إرسال الطلب (واتساب)</a>
-    </div>
-  </div>
-
   <script>
-    const whatsappNumber = "966500000000"; // ضغ رقمك هنا
+    const whatsappNumber = "966500000000"; // اكتب رقم الواتساب هنا
     let cart = [];
 
     fetch('products.json')
       .then(res => res.json())
       .then(products => {
         const container = document.getElementById('catalog');
+        container.innerHTML = ''; // تفريغ المحتوى القديم
+
         products.forEach((p, idx) => {
+          // إضافة ./ لضمان قراءة الصورة بنفس المجلد
+          const imgPath = p.image.startsWith('http') ? p.image : './' + p.image;
+
           container.innerHTML += `
             <div class="card ${idx === 0 ? 'active' : ''}">
               <div class="img-container">
-                <span class="badge">1 / 1</span>
-                <img src="${p.image}" alt="${p.name}">
+                <span class="badge">منتج معتمد</span>
+                <img src="${imgPath}" alt="${p.name}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x260/161616/ffffff?text=صورة+المنتج';">
               </div>
               <div class="card-body">
                 <div class="product-title">${p.name}</div>
                 <div class="price">${p.price}</div>
                 
                 <div>
-                  <div class="options-label">الشد / التعبئة:</div>
+                  <div class="options-label">التعبئة / الشد:</div>
                   <div class="color-options">
-                    <span style="font-size:0.8rem; color:#fff">${p.pack_info || '12 حبة'}</span>
+                    <span style="font-size:0.85rem; color:#00d2d3; font-weight:bold">${p.pack_info || 'متوفر'}</span>
                   </div>
                 </div>
 
                 <div>
                   <div class="options-label">الكمية:</div>
                   <select class="size-select" id="qty-${p.id}">
-                    <option value="1">1 شد (كرتون)</option>
-                    <option value="2">2 شد</option>
-                    <option value="5">5 شد</option>
+                    <option value="1 شد">1 شد</option>
+                    <option value="2 شد">2 شد</option>
+                    <option value="5 شد">5 شد</option>
+                    <option value="10 شد">10 شد</option>
                   </select>
                 </div>
 
@@ -147,7 +44,8 @@
             </div>
           `;
         });
-      });
+      })
+      .catch(err => console.error('خطأ في تحميل المنتجات:', err));
 
     function addToCart(name, price, id) {
       const qty = document.getElementById(`qty-${id}`).value;
@@ -168,7 +66,7 @@
       e.preventDefault();
       if(cart.length === 0) { alert('السلة فارغة!'); return; }
       
-      let msg = "السلام عليكم، أريد طلب المنتجات التالية:\n\n";
+      let msg = "السلام عليكم، أريد طلب المنتجات التالية من الكتالوج:\n\n";
       cart.forEach((item, i) => {
         msg += `${i+1}. ${item.name} - الكمية: ${item.qty} (${item.price})\n`;
       });
@@ -176,6 +74,3 @@
       window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
     }
   </script>
-
-</body>
-</html>
