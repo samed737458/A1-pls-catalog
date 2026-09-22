@@ -12,5 +12,12 @@
     "price": "19 ر.س / للحبة",
     "pack_info": "12 حبة في الشد",
     "image": "gloves-cut-resistant.jpg"
+  },
+  {
+    "id": 3,
+    "name": "سترة سلامة فسفورية عاكسة (A1 PLUS)",
+    "price": "السعر حسب الطلب",
+    "pack_info": "متوفر بمقاسات متعددة",
+    "image": "safety-vest-yellow-black.jpg"
   }
 ]
